@@ -1,7 +1,9 @@
-# fragrance-recommendation-system
-A content-based fragrance recommendation system using Python and machine learning
-
 # Fragrance Recommendation System
+
+**A content-based fragrance recommendation system using Python, exploratory data analysis, and cosine similarity.**
+
+**Related Project:** [Fragrance Atelier — Interactive Streamlit App](https://github.com/Sinchana2k7/fragrance-app)  
+**Live Application:** [Try Fragrance Atelier](https://fragrance-app-beta.streamlit.app/)
 
 ## Project Overview
 
@@ -11,11 +13,13 @@ Using a dataset of **24,063 fragrances**, I analyzed patterns across brands and 
 
 The goal was to understand how fragrance compositions can be used to identify similar perfumes and generate recommendations without relying on user purchase histories.
 
+This project served as the foundation for **Fragrance Atelier**, an interactive Streamlit application that allows users to discover fragrances through similar perfumes or preferred scent notes. The deployed application is maintained in a separate repository and uses an expanded, price-enriched, and further cleaned dataset of 12,369 fragrances.
+
 ## Dataset
 
 This project uses the **Fragrantica.com Fragrance Dataset**, published by Olga G (Miufana1) on Kaggle. The data was originally collected from Fragrantica.com and contains information about perfumes, fragrance notes, brands, ratings, and other product characteristics.
 
-The analysis uses the partially cleaned dataset (`fra_cleaned.csv`), containing **24,063 fragrances and 18 features**.
+The original analysis uses the partially cleaned dataset (`fra_cleaned.csv`), containing **24,063 fragrances and 18 features**.
 
 ### Key Variables
 
@@ -39,10 +43,10 @@ The original CSV file is not included in this repository due to its size.
 ## Tools and Technologies
 
 - **Python:** Data analysis and recommendation system development
-- **Pandas and NumPy:** Data manipulation, cleaning, and feature engineering
-- **Matplotlib and Seaborn:** Data visualization
-- **Scikit-learn:** Cosine similarity and similarity-based modeling
-- **Jupyter Notebook:** Development and documentation
+- **Pandas and NumPy:** Data cleaning, manipulation, and feature engineering
+- **Matplotlib and Seaborn:** Exploratory data visualization
+- **Scikit-learn:** MultiLabelBinarizer, cosine similarity, and content-based recommendations
+- **Jupyter Notebook:** Development, experimentation, and documentation
 
 ## Methodology
 
@@ -65,15 +69,17 @@ This analysis helped identify patterns in fragrance compositions and provided co
 
 ### 3. Feature Engineering
 
-Converted fragrance note compositions into binary feature vectors.
+Converted fragrance note compositions into binary feature vectors using `MultiLabelBinarizer`.
 
-Each fragrance was represented by the presence or absence of individual notes, allowing fragrances with different compositions to be compared numerically.
+Top, middle, and base notes were combined into a representation of each fragrance's scent profile. Each note was encoded as either present (1) or absent (0), allowing fragrances with different compositions to be compared numerically.
 
 These vectors were used as the foundation for both recommendation systems.
 
 ### 4. Content-Based Recommendation Systems
 
 Developed two recommendation approaches using cosine similarity to compare fragrance note compositions.
+
+Cosine similarity measures the similarity between two vectors based on their orientation. In this project, it was used to compare the overlap between fragrance note profiles.
 
 #### Model 1: Fragrance-to-Fragrance Recommendation
 
@@ -82,9 +88,10 @@ This system accepts the name of an existing fragrance and identifies other perfu
 The process involves:
 
 1. Identifying the selected fragrance in the dataset.
-2. Retrieving its similarity scores against other fragrances.
-3. Ranking the fragrances by cosine similarity.
-4. Returning the most similar recommendations, along with their brands and ratings.
+2. Retrieving its encoded fragrance note profile.
+3. Calculating cosine similarity against other fragrances.
+4. Ranking fragrances by similarity score.
+5. Returning the highest-ranked recommendations, along with their brands and ratings.
 
 #### Model 2: Note-Based Recommendation
 
@@ -94,12 +101,17 @@ The process involves:
 
 1. Accepting a list of preferred fragrance notes.
 2. Converting those notes into a binary feature vector.
-3. Calculating cosine similarity between the user's note profile and the fragrances in the dataset.
-4. Returning fragrances with the highest similarity scores.
+3. Calculating cosine similarity between the user's note profile and fragrances in the dataset.
+4. Ranking fragrances by similarity score.
+5. Returning fragrances with the highest similarity scores.
 
-Both models use fragrance characteristics rather than purchase histories or individual user ratings to generate recommendations.
+Both models rely on fragrance characteristics rather than purchase histories or individual user ratings to generate recommendations.
+
+**Model limitation:** Similarity scores reflect overlap in listed fragrance notes, not guaranteed similarity in scent perception or individual preference. The models do not account for differences in note intensity, formulation, longevity, or skin chemistry.
 
 ## Example Recommendations
+
+The following examples were generated using the original recommendation system and its 24,063-fragrance dataset. They are separate from the results produced by the updated Streamlit application.
 
 ### Fragrance-to-Fragrance Recommendations
 
@@ -135,23 +147,60 @@ Some of the highest-ranked recommendations included:
 
 The results demonstrate how users can receive personalized fragrance recommendations by specifying the scent notes they prefer.
 
+## From Recommendation Model to Fragrance Atelier
+
+Following the initial analysis and model development, I expanded the project into **Fragrance Atelier**, an interactive fragrance discovery application built with Streamlit.
+
+The application builds on the original content-based recommendation approach while introducing a user-facing interface and an updated dataset.
+
+### Application Features
+
+- **Fragrance Twin:** Search for an existing perfume and discover fragrances with similar scent notes.
+- **Discover by Notes:** Select preferred fragrance notes and receive personalized recommendations.
+- **Four Recommendations:** View four ranked fragrance suggestions for each search.
+- **Similarity Scores:** Compare recommendations based on fragrance note overlap.
+- **Ratings and Reference Prices:** View additional product information alongside recommendations.
+- **Searchable Interface:** Find fragrances by name or brand.
+- **Interactive Web Application:** Explore recommendations without running Python locally.
+
+### Updated Dataset
+
+The deployed application uses a separately prepared dataset containing:
+
+- **12,369 fragrances**
+- **463 distinct fragrance notes**
+- Recorded USD reference prices for all included fragrances
+- Standardized fragrance notes and cleaned product records
+
+The application dataset differs from the original analysis dataset because of additional data collection, pricing enrichment, and cleaning.
+
+The two repositories are maintained separately to distinguish the underlying data science work from the deployed application.
+
+**Application Repository:** [fragrance-app](https://github.com/Sinchana2k7/fragrance-app)
+
+**Live Application:** [Fragrance Atelier](https://fragrance-app-beta.streamlit.app/)
+
 ## Key Takeaways
 
 - Analyzed a dataset containing over 24,000 fragrances and 18 original features.
 - Explored fragrance patterns across countries, brands, and scent compositions.
 - Investigated fragrance note popularity, ratings, and co-occurrence relationships.
-- Applied feature engineering to transform fragrance notes into numerical representations.
+- Applied feature engineering to transform categorical fragrance notes into numerical representations.
 - Built two content-based recommendation systems using cosine similarity.
-- Demonstrated how product attributes can be used to generate recommendations without requiring user purchase histories.
+- Demonstrated how product attributes can generate recommendations without requiring user purchase histories.
+- Extended the original recommendation approach into a deployed Streamlit application with an updated, price-enriched dataset.
 
-## Future Improvements
+## Limitations and Future Improvements
 
-Potential improvements to this project include:
+While the models demonstrate how content-based recommendation systems can support fragrance discovery, several opportunities remain:
 
-- Assigning different weights to top, middle, and base notes to better represent fragrance composition.
-- Incorporating additional attributes, such as fragrance concentration and release year.
-- Evaluating recommendation quality using additional similarity metrics and user feedback.
-- Developing an interactive web application to allow users to explore recommendations in real time.
+- **Weighted fragrance notes:** Assign different weights to top, middle, and base notes to better represent fragrance composition.
+- **Additional fragrance attributes:** Incorporate concentration, release year, or other product characteristics into recommendation scoring.
+- **Alternative similarity methods:** Compare cosine similarity with other approaches for representing fragrance relationships.
+- **Recommendation evaluation:** Collect structured user feedback to assess perceived recommendation relevance and usefulness.
+- **Improved personalization:** Explore user preferences beyond individual fragrance notes.
+
+The original goal of developing an interactive web application has been completed through Fragrance Atelier. Future development can focus on evaluating recommendation quality and improving personalization.
 
 ## How to Run
 
@@ -165,7 +214,7 @@ Locate the `fra_cleaned.csv` file.
 
 ### 2. Organize the Files
 
-Place the dataset in the same directory as the notebook:
+Place the dataset in the same directory as the original analysis notebook:
 
 ```text
 fragrance-recommendation-system/
@@ -199,12 +248,12 @@ Run the notebook cells in order to reproduce the analysis and recommendation res
 
 ## Project Files
 
-- **Fragrance_Analysis.ipynb:** Contains the exploratory analysis, preprocessing, visualizations, and recommendation systems.
-- **README.md:** Project documentation and instructions.
+- **Fragrance_Analysis.ipynb:** Contains exploratory analysis, preprocessing, visualizations, and the two content-based recommendation systems.
+- **README.md:** Project documentation, methodology, results, and instructions.
 - **.gitignore:** Excludes unnecessary local files from version control.
 
 ## Acknowledgments
 
 The fragrance dataset was published by **Olga G (Miufana1)** on Kaggle, using information collected from Fragrantica.com.
 
-The dataset is credited to its original creator and source.
+The dataset is credited to its original creator and source under the stated CC BY-NC-SA 4.0 license.
