@@ -2,8 +2,9 @@
 
 **A content-based fragrance recommendation system using Python, exploratory data analysis, and cosine similarity.**
 
-**Related Project:** [Fragrance Atelier — Interactive Streamlit App](https://github.com/Sinchana2k7/fragrance-app)  
-**Live Application:** [Try Fragrance Atelier](https://fragrance-app-beta.streamlit.app/)
+
+**Related Project:** [ScentScout — Interactive Fragrance Discovery App](https://github.com/Sinchana2k7/fragrance-app)
+**Live Application:** [Try ScentScout](https://scent-scout.streamlit.app/)
 
 ## Project Overview
 
@@ -13,7 +14,8 @@ Using a dataset of **24,063 fragrances**, I analyzed patterns across brands and 
 
 The goal was to understand how fragrance compositions can be used to identify similar perfumes and generate recommendations without relying on user purchase histories.
 
-This project served as the foundation for **Fragrance Atelier**, an interactive Streamlit application that allows users to discover fragrances through similar perfumes or preferred scent notes. The deployed application is maintained in a separate repository and uses an expanded, price-enriched, and further cleaned dataset of 12,369 fragrances.
+
+This project served as the foundation for **ScentScout**, an interactive fragrance discovery application built with Streamlit. ScentScout allows users to discover perfumes through similar fragrances or their preferred scent notes. The deployed application is maintained in a separate GitHub repository and uses an updated, price-enriched dataset of 12,369 fragrances.
 
 ## Dataset
 
@@ -147,11 +149,13 @@ Some of the highest-ranked recommendations included:
 
 The results demonstrate how users can receive personalized fragrance recommendations by specifying the scent notes they prefer.
 
-## From Recommendation Model to Fragrance Atelier
+## From Recommendation Model to ScentScout
 
-Following the initial analysis and model development, I expanded the project into **Fragrance Atelier**, an interactive fragrance discovery application built with Streamlit.
 
-The application builds on the original content-based recommendation approach while introducing a user-facing interface and an updated dataset.
+Following the initial analysis and model development, I expanded the project into **ScentScout**, an interactive fragrance discovery application built with Streamlit.
+
+The application builds on the original content-based recommendation approach while introducing a user-facing interface, reference pricing, and fragrance-family classifications.
+
 
 ### Application Features
 
@@ -162,6 +166,7 @@ The application builds on the original content-based recommendation approach whi
 - **Ratings and Reference Prices:** View additional product information alongside recommendations.
 - **Searchable Interface:** Find fragrances by name or brand.
 - **Interactive Web Application:** Explore recommendations without running Python locally.
+- **Fragrance Families:** Explore note-derived classifications such as Floral, Fruity, Gourmand, Spicy, Woody, and Citrus.
 
 ### Updated Dataset
 
@@ -178,7 +183,7 @@ The two repositories are maintained separately to distinguish the underlying dat
 
 **Application Repository:** [fragrance-app](https://github.com/Sinchana2k7/fragrance-app)
 
-**Live Application:** [Fragrance Atelier](https://fragrance-app-beta.streamlit.app/)
+**Live Application:** [ScentScout](https://scent-scout.streamlit.app/)
 
 ## Key Takeaways
 
@@ -200,7 +205,8 @@ While the models demonstrate how content-based recommendation systems can suppor
 - **Recommendation evaluation:** Collect structured user feedback to assess perceived recommendation relevance and usefulness.
 - **Improved personalization:** Explore user preferences beyond individual fragrance notes.
 
-The original goal of developing an interactive web application has been completed through Fragrance Atelier. Future development can focus on evaluating recommendation quality and improving personalization.
+
+The original goal of developing an interactive web application has been completed through **ScentScout**. Future development will focus on evaluating recommendation quality, improving personalization, and incorporating user feedback.
 
 ## How to Run
 
